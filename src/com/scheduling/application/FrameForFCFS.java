@@ -19,7 +19,7 @@ class FrameForFCFS extends JFrame {
 		this.obj = obj;
 		// this.setResizable(false);
 		this.setVisible(true);
-		this.setSize(obj.SCREEN_WIDTH + 100, obj.SCREEN_HEIGHT);
+		this.setSize(obj.SCREEN_WIDTH + 100, obj.SCREEN_HEIGHT); //?
 		arrivalTime = obj.arrivalTime.clone();
 	}
 
@@ -31,25 +31,35 @@ class FrameForFCFS extends JFrame {
 		//int B[] = new int[10];
 		
 		obj.Twt = (float) 0.0;
+		
 		for (int i = 0; i <obj.numberOfProcesses; i++)
 		{
-			obj.CPUBurstTime[i] = obj.CPUBurstTime[i];
+			//obj.CPUBurstTime[i] = obj.CPUBurstTime[i];
 			System.out.println("Burst Time for Process p"+ (i+1) +" = " + obj.CPUBurstTime[i]);
 			//System.out.println(obj.CPUBurstTime[i]);
 		}
-		obj.Wt[1] = (float) 0.0;
-		for (int i = 2; i <= obj.numberOfProcesses; i++)
+		
+		// to assign the waiting time for the 1st precesss including the arrival time
+		if (obj.arrivalTime[0] > 0)
 		{
-			obj.Wt[i] = obj.CPUBurstTime[i - 1] + obj.Wt[i - 1];
+			obj.Wt[0] = obj.arrivalTime[0];
+		}
+		else
+			obj.Wt[0] = (float) 0.0;
+		
+		// to calculate the waiting time for others
+		for (int i = 1; i < obj.numberOfProcesses; i++)
+		{
+			obj.Wt[i] = obj.CPUBurstTime[i-1] + obj.Wt[i-1];
 		}
 		
 		//printing the waiting time for each process
-		for (int i = 1; i <= obj.numberOfProcesses; i++)
+		for (int i = 0; i < obj.numberOfProcesses; i++)
 		{
-			System.out.println("The waiting time for p" + (i) + " = " +obj.Wt[i]);
+			System.out.println("The waiting time for p" + (i+1) + " = " +obj.Wt[i]);
 		}
 		//Calculating Average Weighting Time
-		for (int i = 1; i <= obj.numberOfProcesses; i++)
+		for (int i = 0; i < obj.numberOfProcesses; i++)
 		{
 			obj.Twt = obj.Twt + obj.Wt[i];
 		}

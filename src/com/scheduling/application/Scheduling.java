@@ -17,11 +17,11 @@ public class Scheduling {
 	static Scheduling obj;
 	//static int n; 
 	//static int Bu[] = new int[10];
-	static float Twt;
-	static float Awt;
+	static float Twt; // Total waiting time
+	static float Awt; //Average waiting time 
 	static float w; 
 	float[] A; 
-	static float Wt[] = new float[10];
+	static float Wt[] = new float[10]; // Waiting time for each process
 
 	Scheduling() {
 		Scheduling.obj = this;
@@ -82,11 +82,10 @@ public class Scheduling {
 		System.out.println("YOU HAVE THE FOLLOWING CHOICES : \n");
 		System.out.println("1. Draw Gantt Chart for FCFS Algorithm");
 		System.out.println("2. Draw Gantt Chart for Non-Preemptive SJF Algorithm");
-		System.out.println("3. Draw Gantt Chart for Preemptive SJF Algorithm");
-		System.out.println("4. Draw Gantt Chart for Priority Algorithm");
-		System.out.println("5. Draw Gantt Chart for Round Robin");
+		System.out.println("3. Draw Gantt Chart for Priority Algorithm");
+		System.out.println("4. Draw Gantt Chart for Round Robin");
 
-		System.out.println("6. Exit");
+		System.out.println("5. Exit");
 		
 		while (true) {
 			System.out.println("ENTER YOUR CHOICE : ");
@@ -101,26 +100,27 @@ public class Scheduling {
 				FrameForNonPreemptiveSJF.SJF();
 				drawGanttChartForNonPreemptiveSJF();
 				break;
+			
 			case 3:
-				drawGanttChartForPreemptiveSJF();
-				break;
-			case 4:
 				for (int i = 0; i < numberOfProcesses; i++) {
 					
 					System.out.print("Enter the priority for process" + (i + 1) +" ");
-					CPUBurstTime[i] = Integer.parseInt(br.readLine());
+					priority[i] = Integer.parseInt(br.readLine());
 				}
 				FrameForPriorityScheduling.Priority();
 				drawGanttChartForPriorityScheduling();
 				break;
-			case 5:
+				
+			case 4:
 				System.out.print("Enter the time Quantum : ");
 				timeQuantum = Integer.parseInt(br.readLine());
 				FrameForRoundRobinScheduling.RoundRobin();
 				drawGanttChartForRoundRobinScheduling();
 				break;
-			case 6:
+				
+			case 5:
 				System.exit(0);
+				
 			default:
 				System.out
 						.println("You Entered a wrong Choice\nPlease fill in the choice again...");
@@ -134,10 +134,6 @@ public class Scheduling {
 
 	public static void drawGanttChartForNonPreemptiveSJF() {
 		new FrameForNonPreemptiveSJF(obj);
-	}
-
-	public static void drawGanttChartForPreemptiveSJF() {
-		new FrameForPreemptiveSJF(obj);
 	}
 
 	public static void drawGanttChartForPriorityScheduling() {

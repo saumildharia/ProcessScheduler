@@ -31,8 +31,8 @@ class FrameForPriorityScheduling extends JFrame {
 		for (i = 0; i < obj.numberOfProcesses; i++)
 		{
 			B[i] = obj.CPUBurstTime[i];
-			System.out.println("Burst Time for Process p"+ (i+1) +" = ");
-			System.out.println(B[i]);
+			System.out.println("Burst Time for Process p"+ (i+1) +" = " + B[i]);
+			//System.out.println();
 			//System.out.println("Enter the priority for process P"+ i +" = ");
 			P[i]=obj.priority[i];
 			
@@ -59,9 +59,9 @@ class FrameForPriorityScheduling extends JFrame {
 			}
 			
 			//printing the waiting time for each process
-			for (int m = 1; m <= obj.numberOfProcesses; m++)
+			for (int m = 0; m < obj.numberOfProcesses; m++)
 			{
-				System.out.println("The waiting time for p" + (m) + " = " +obj.Wt[m]);
+				System.out.println("The waiting time for p" + (m+1) + " = " +obj.Wt[m]);
 			}
 			//calculating average weighting Time
 			for (i = 0; i < obj.numberOfProcesses ; i++)
@@ -88,6 +88,7 @@ class FrameForPriorityScheduling extends JFrame {
 
 		for (int j = 0; j < obj.numberOfProcesses; j++) {
 			min = Integer.MAX_VALUE;
+			//min = 1;
 			for (int i = 0; i < obj.numberOfProcesses; i++) {
 				if (min > priority[i]) {
 					min = priority[i];
